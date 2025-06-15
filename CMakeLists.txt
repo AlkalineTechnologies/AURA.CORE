@@ -13,7 +13,15 @@ target_include_directories( AURA.CORE
     PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/source/include
 )
 
-find_package( SDL2 REQUIRED )
+if(WIN32)
+
+    set(SDL2_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/SDL2/include")
+    set(SDL2_LIBRARY "${CMAKE_SOURCE_DIR}/SDL2/lib/x64/SDL2.lib")
+else()
+    find_package(SDL2 REQUIRED)
+    set(SDL2_INCLUDE_DIR ${SDL2_INCLUDE_DIRS})
+    set(SDL2_LIBRARY ${SDL2_LIBRARIES})
+endif()
 
 target_include_directories( AURA.CORE PRIVATE ${SDL2_INCLUDE_DIRS} )
 target_link_libraries( AURA.CORE PRIVATE ${SDL2_LIBRARIES} )
