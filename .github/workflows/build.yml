@@ -17,19 +17,22 @@ jobs:
               if: matrix.os == 'ubuntu-latest'
               run: sudo apt update && sudo apt install libsdl2-dev
 
-            - name: Install SDL2 (Windows)
+            - name: Setup SDL2 (Windows)
               if: matrix.os == 'windows-latest'
-              run: choco install sdl2
+              run: |
+                curl -LO https://github.com/libsdl-org/SDL/releases/download/release-2.32.8/SDL2-devel-2.32.8-VC.zip
+                7z x SDL2-devel-2.32.8-VC.zip -oSDL2
+                mv SDL2/SDL2-2.32.8 SDL2
 
             - name: Install SDL2 (macOS)
               if: matrix.os == 'macos-latest'
-              run: brew install sdl2
-
+              run: brew install sdl2            
             - name: configure
               run: cmake -B build -DCMAKE_BUILD_TYPE=Release
-            
+
             - name: build
               run: cmake --build build --config Release
+
             - name: Upload artifact
               uses: actions/upload-artifact@v4
               with:
