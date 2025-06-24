@@ -41,7 +41,7 @@ target_link_libraries( aura.core
     glew
 )
 
-add_definitions(-DGLEW_STATIC)
+add_definitions(-DGLEW_STATIC -DGLEW_NO_GLU)
 
 if (WIN32)
     target_compile_definitions(aura.core PRIVATE AURA_PLATFORM_WINDOWS)
