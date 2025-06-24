@@ -31,11 +31,13 @@ set_target_properties(glew PROPERTIES LINKER_LANGUAGE C)
 if(WIN32)
     set(SDL2_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/SDL2/include")
     set(SDL2_LIBRARY "${CMAKE_SOURCE_DIR}/SDL2/lib/x64/SDL2.lib")
+    set(OPENGL_LIBRARIES opengl32)
+
 else()
     find_package(SDL2 REQUIRED)
     set(SDL2_INCLUDE_DIR ${SDL2_INCLUDE_DIRS})
     set(SDL2_LIBRARY ${SDL2_LIBRARIES})
-    
+    set (OPENGL_LIBRARIES ${OPENGL_LIBRARIES})
     target_compile_options(aura.core PRIVATE -fvisibility=hidden)
 endif()
 
@@ -45,6 +47,7 @@ target_include_directories( aura.core
 target_link_libraries( aura.core 
     ${SDL2_LIBRARY}
     glew
+    ${OPENGL_LIBRARIES}
 )
 
 add_definitions(-DGLEW_STATIC -DGLEW_NO_GLU)
