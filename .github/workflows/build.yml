@@ -25,7 +25,7 @@ jobs:
               if: matrix.os == 'windows-latest'
               run: |
                 curl -LO https://github.com/libsdl-org/SDL/releases/download/release-2.32.8/SDL2-devel-2.32.8-VC.zip
-                7z x SDL2-devel-2.32.8-VC.zip -oSDL2
+                7z x SDL2-devel-2.32.8-VC.zip
                 mv SDL2/SDL2-2.32.8 SDL2
 
             - name: Install SDL2 (macOS)
