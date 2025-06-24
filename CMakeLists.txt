@@ -35,14 +35,15 @@ else()
     find_package(SDL2 REQUIRED)
     set(SDL2_INCLUDE_DIR ${SDL2_INCLUDE_DIRS})
     set(SDL2_LIBRARY ${SDL2_LIBRARIES})
+    
+    target_compile_options(aura.core PRIVATE -fvisibility=hidden)
 endif()
 
-target_compile_options(aura.core PRIVATE -fvisibility=hidden)
 target_include_directories( aura.core 
-    PRIVATE ${SDL2_INCLUDE_DIRS}
+    PRIVATE ${SDL2_INCLUDE_DIR}
 )
 target_link_libraries( aura.core 
-    ${SDL2_LIBRARIES}
+    ${SDL2_LIBRARY}
     glew
 )
 
