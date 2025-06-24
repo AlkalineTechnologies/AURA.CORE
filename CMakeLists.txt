@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 3.10)
 
 project(aura.core VERSION 0.0.1 LANGUAGES C CXX)
 
+cmake_policy(SET CMP0072 NEW) # Allow using the option() command to set cache variables
+
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
@@ -20,6 +22,7 @@ target_include_directories( aura.core
 )
 
 file(GLOB GLEW_SOURCES external/GLEW/glew.c)
+find_package(OpenGL REQUIRED)
 add_library(glew STATIC ${GLEW_SOURCES})
 target_include_directories(glew PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/external/GLEW)
 target_compile_definitions(glew PUBLIC GLEW_STATIC)
@@ -40,7 +43,6 @@ target_include_directories( aura.core
 )
 target_link_libraries( aura.core 
     ${SDL2_LIBRARIES}
-    GL
     glew
 )
 
